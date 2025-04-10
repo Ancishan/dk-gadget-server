@@ -7,10 +7,21 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin:'https://dk-gadget-server-1.onrender.com', // Your Next.js frontend URL
-  credentials: true
-}));
+const allowedOrigins = [
+  'https://dk-gadget-1.onrender.com', // Allow frontend origin
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error('Not allowed by CORS')); // Block the request
+    }
+  },
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
