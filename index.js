@@ -8,7 +8,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin:'https://dk-gadget-server-2.onrender.com', // Your Next.js frontend URL
+  origin:'https://dk-gadget-server-1.onrender.com', // Your Next.js frontend URL
   credentials: true
 }));
 app.use(bodyParser.json());
